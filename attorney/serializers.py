@@ -17,19 +17,14 @@ class CustomLoginSerializer(serializers.Serializer):
         username = data.get("username")
         password = data.get("password")
 
-        user_qidiruv = User.objects.filter(username=username).first()
-        if not user_qidiruv:
-            raise serializers.ValidationError("User with this username does not exist.")
-
         user = authenticate(username=username, password=password)
         if not user:
-            raise serializers.ValidationError("Incorrect password.")
+            raise serializers.ValidationError("Invalid username or password.")
 
         if not user.is_active:
             raise serializers.ValidationError("User account is disabled.")
 
         refresh = RefreshToken.for_user(user)
-
         return {
             "refresh": str(refresh),
             "access": str(refresh.access_token),

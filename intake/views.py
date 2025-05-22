@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from intake.serializers import LeadSerializer
 from intake.tasks import attorney_email_task
+from intake.throttle import LeadCreateThrottle
 
 
 class LeadCreateApiView(APIView):
@@ -13,7 +14,7 @@ class LeadCreateApiView(APIView):
        Ushbu yakuniy nuqta umumiy foydalanuvchilarga yetakchi formani yuborish imkonini beradi.
        Muvaffaqiyatli topshirilgandan so'ng, advokatlarga elektron pochta xabari yuboriladi.
     """
-
+    throttle_classes = [LeadCreateThrottle]
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'attorney.User'
 
 MIDDLEWARE = [
+    # "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -153,6 +154,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_THROTTLE_RATES': {
+        'lead_create': '100/hour',
+        'custom_login': '30/hour',
+    }
 }
 
 SIMPLE_JWT = {
@@ -170,7 +175,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 # 'redis' bu docker-compose.yml dagi servis nomi bo‘lib, konteyner ichida shu nom bilan murojaat qilinadi.
-CELERY_BROKER_URL = 'redis://redis:6379/0'
+# CELERY_BROKER_URL = 'redis://localhost:6379/0' runserver uchun
+
+CELERY_BROKER_URL = 'redis://redis:6372/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
@@ -198,3 +205,26 @@ LOGGING = {
 
 # Swagger interfeysida renderer'lar bilan bog‘liq mos kelmaslik xatolarini oldini oladi.
 SWAGGER_USE_COMPAT_RENDERERS = False
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# CORS Ruxsatlar
+# CORS_ALLOWED_ORIGINS = [
+#     "https://ari.uzfati.uz",
+#     "http://ari.uzfati.uz",
+# ]
+
+
+# CORS_ALLOW_CREDENTIALS = True  # Cookie va auth tokenlarni ishlatish uchun
+
+# CSRF sozlamalari
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://warehouse.bekzodbek-dev.uz",
+#     "https://warehouse.bekzodbek-dev.uz",
+# ]
+#
+# CSRF_COOKIE_SECURE = True  # HTTPS orqali xavfsiz cookie'larni ishlatish
+# CSRF_USE_SESSIONS = True  # CSRF tokenni sessiya orqali saqlash

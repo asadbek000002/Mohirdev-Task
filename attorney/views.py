@@ -1,7 +1,10 @@
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
+from rest_framework.pagination import PageNumberPagination
 from attorney.serializers import CustomLoginSerializer, LeadsListSerializer, LeadStatusUpdateSerializer
 from intake.models import Lead
 from intake.tasks import lead_email_task
@@ -23,34 +26,39 @@ class CustomLoginView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-from django.db.models import Q
+class LeadsPagination(PageNumberPagination):
+    page_size = 10
 
 
-class LeadsListApiView(APIView):
+class LeadsListApiView(ListAPIView):
     """
-       GET /leads/
-       Barcha lead'larni ro‘yxatini olish uchun endpoint.
+         GET /leads/
+         Barcha lead'larni ro‘yxatini olish uchun endpoint.
 
-       Query parameters:
-       - `status` (optional): Lead status bo‘yicha filterlash (`PENDING` yoki `REACHED_OUT`)
-       - `email` (optional): Email bo‘yicha qidirish (to‘liq yoki qisman)
-    """
+         Query parameters:
+         - `status` (optional): Lead status bo‘yicha filterlash (`PENDING` yoki `REACHED_OUT`)
+         - `email` (optional): Email bo‘yicha qidirish (to‘liq yoki qisman)
+      """
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = LeadsListSerializer
+    pagination_class = LeadsPagination
 
-    def get(self, request):
-        status_filter = request.query_params.get('status')
-        email_query = request.query_params.get('email')
+    def get_queryset(self):
+        queryset = Lead.objects.all().order_by('-created_at')
+        status_filter = self.request.query_params.get('status', '').upper()
+        email_query = self.request.query_params.get('email')
 
-        leads = Lead.objects.all()
+        filters = Q()
 
         if status_filter in [Lead.LeadStatus.PENDING, Lead.LeadStatus.REACHED_OUT]:
-            leads = leads.filter(status=status_filter)
+            filters &= Q(status=status_filter)
 
         if email_query:
-            leads = leads.filter(email__icontains=email_query.strip())
+            filters &= Q(email__icontains=email_query.strip())
 
-        serializer = LeadsListSerializer(leads, many=True)
-        return Response(serializer.data)
+        queryset = queryset.filter(filters).order_by('-created_at')
+
+        return queryset
 
 
 class LeadStatusUpdateAPIView(APIView):
