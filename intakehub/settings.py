@@ -227,3 +227,12 @@ CSRF_TRUSTED_ORIGINS = [
 
 CSRF_COOKIE_SECURE = True  # HTTPS orqali xavfsiz cookie'larni ishlatish
 CSRF_USE_SESSIONS = True  # CSRF tokenni sessiya orqali saqlash
+
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://02461535cb9067c73d09cfb5df2c5a4f@o4509367982555136.ingest.de.sentry.io/4509367989239888",
+    # Add data like request headers and IP for users,
+    # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+    send_default_pii=True,
+)
