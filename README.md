@@ -1,19 +1,18 @@
 Swagger UI (API testlash uchun):  
- 👉 https://mohirdevtask.dialektalcorpus.uz
+👉 https://mohirdevtask.dialektalcorpus.uz
 
 ## 📚 Mavzular (Navigatsiya)
 
-
-1. [Loyiha haqida](#intakehub-loyihasi)  
-2. [Talablar](#-talablar-dependencies)  
-3. [Ishga tushirish](#-loyihani-ishga-tushurish-docker-orqali)  
-4. [Testlar](#-testlarni-ishga-tushirish)  
-5. [Admin va foydalanuvchilar](#-superuser-admin-yaratish)  
-6. [Email funksiyasi](#-email-qabul-qiluvchilarni-qoshish)  
-7. [Rezyume talablari](#-rezyume-fayliga-qoyilgan-talablar)  
+1. [Loyiha haqida](#intakehub-loyihasi)
+2. [Talablar](#-talablar-dependencies)
+3. [Ishga tushirish](#-loyihani-ishga-tushurish-docker-orqali)
+4. [Testlar](#-testlarni-ishga-tushirish)
+5. [Admin va foydalanuvchilar](#-superuser-admin-yaratish)
+6. [Email funksiyasi](#-email-qabul-qiluvchilarni-qoshish)
+7. [Rezyume talablari](#-rezyume-fayliga-qoyilgan-talablar)
 8. [Ishlash prinsipi](#sayt-qanday-ishlaydi)
 9. [Deploy haqida qisqacha](#-deploy-haqida-qisqacha)
-
+10. [Monitoring va Logging](#-monitoring-va-logging)
 
 # IntakeHub loyihasi
 
@@ -164,16 +163,16 @@ Loyiha quyidagi texnologiyalar yordamida muvaffaqiyatli deploy qilindi:
 
 ### 🌍 Kirish manzillari
 
->    Swagger UI (API testlash uchun):
->    👉 https://mohirdevtask.dialektalcorpus.uz
+> Swagger UI (API testlash uchun):
+> 👉 https://mohirdevtask.dialektalcorpus.uz
 >
 >    Admin panel:
->    👉 https://mohirdevtask.dialektalcorpus.uz/admin/
+> 👉 https://mohirdevtask.dialektalcorpus.uz/admin/
 >
 >    Kirish uchun:  
->    username: `admin`  
->    password: `1234`
- 
+> username: `admin`  
+> password: `1234`
+
 ### 🧪 Test qilish bo‘yicha ko‘rsatma
 
 - Admin panel orqali yangi advokat (attorney) yarating
@@ -196,6 +195,25 @@ Eslatma: faqat advokatlar login qiladi – foydalanuvchilar ro‘yxatdan o‘ta 
 
 - Backend statik fayllarni ham serve qiladi (agar kerak bo‘lsa)
 
+---
+
+## 📈 Monitoring va Logging
+
+Loyihada monitoring va xatoliklarni kuzatib borish uchun [Sentry](https://sentry.io) xizmati integratsiya qilingan:
+
+- Django uchun `sentry-sdk` yordamida sozlangan
+- Har qanday exception Sentry platformasiga yuboriladi
+- Loyihadagi muhim xatoliklar veb-interfeys orqali real vaqtda kuzatib boriladi
+- Docker muhitida ham to‘liq ishlaydi
+
+Sentry sahifasida barcha xatoliklar, traceback, foydalanuvchi ma’lumotlari (PII) va so‘rovlar (request) ko‘rinadi
+
+> Monitoring test qilish uchun quyidagi URL orqali ZeroDivisionError yuboriladi:  
+> https://mohirdevtask.dialektalcorpus.uz/sentry-debug/  
+> 
+<p align="center">
+  <img src="img.png" alt="img" width="700"/>
+</p>
 
 
 ## Muallif
