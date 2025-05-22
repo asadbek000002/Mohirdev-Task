@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import Lead
+from .models import Lead, Advertisement
 import os
+
 
 # Lead ro'yxatini yaratish uchun serializer
 class LeadSerializer(serializers.ModelSerializer):
@@ -30,3 +31,11 @@ class LeadSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Only .pdf, .doc, .docx files are accepted.")
 
         return value
+
+
+class AdvertisementSerializer(serializers.ModelSerializer):
+    """Reklama ma'lumotlarini ko‘rish/yaratish uchun serializer"""
+
+    class Meta:
+        model = Advertisement
+        fields = ['id', 'title', 'description', 'image', 'is_active', 'created_at']

@@ -15,6 +15,7 @@ inflection==0.5.1
 iniconfig==2.1.0
 kombu==5.5.3
 packaging==25.0
+pillow==11.2.1
 pluggy==1.6.0
 prompt_toolkit==3.0.51
 psycopg2-binary==2.9.10
