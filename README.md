@@ -210,11 +210,19 @@ Sentry sahifasida barcha xatoliklar, traceback, foydalanuvchi ma’lumotlari (PI
 
 > Monitoring test qilish uchun quyidagi URL orqali ZeroDivisionError yuboriladi:  
 > https://mohirdevtask.dialektalcorpus.uz/sentry-debug/  
-> 
+
+
 <p align="center">
   <img src="img.png" alt="img" width="700"/>
 </p>
 
+#### 🔔 Sentry monitoring integratsiyasi orqali xatoliklar aniqlanib, administrator email manziliga avtomatik yuboriladi.
+
+<p align="center">
+  <img src="img_1.png" alt="img" width="700"/>
+</p>
+
+---
 
 ## Muallif
 
