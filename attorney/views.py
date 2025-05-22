@@ -23,22 +23,32 @@ class CustomLoginView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+from django.db.models import Q
+
+
 class LeadsListApiView(APIView):
     """
        GET /leads/
        Barcha lead'larni ro‘yxatini olish uchun endpoint.
 
-       Query parameter:
-       - `status` (optional): Lead status bo‘yicha filterlash (`PENDING` yoki `REACHED_OUT`).
+       Query parameters:
+       - `status` (optional): Lead status bo‘yicha filterlash (`PENDING` yoki `REACHED_OUT`)
+       - `email` (optional): Email bo‘yicha qidirish (to‘liq yoki qisman)
     """
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         status_filter = request.query_params.get('status')
+        email_query = request.query_params.get('email')
+
         leads = Lead.objects.all()
-        # sawaggerga query nolarini korsatib qoyish
+
         if status_filter in [Lead.LeadStatus.PENDING, Lead.LeadStatus.REACHED_OUT]:
             leads = leads.filter(status=status_filter)
+
+        if email_query:
+            leads = leads.filter(email__icontains=email_query.strip())
+
         serializer = LeadsListSerializer(leads, many=True)
         return Response(serializer.data)
 
