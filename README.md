@@ -1,3 +1,15 @@
+## 📚 Mavzular (Navigatsiya)
+
+
+1. [Loyiha haqida](#intakehub-loyihasi)  
+2. [Talablar](#-talablar-dependencies)  
+3. [Ishga tushirish](#-loyihani-ishga-tushurish-docker-orqali)  
+4. [Testlar](#-testlarni-ishga-tushirish)  
+5. [Admin va foydalanuvchilar](#-superuser-admin-yaratish)  
+6. [Email funksiyasi](#-email-qabul-qiluvchilarni-qoshish)  
+7. [Rezyume talablari](#-rezyume-fayliga-qoyilgan-talablar)  
+8. [Ishlash prinsipi](#sayt-qanday-ishlaydi)
+
 # IntakeHub loyihasi
 
 **IntakeHub** — bu foydalanuvchilar ariza (lead) yuborishi mumkin bo‘lgan va ariza yuborilgach hodimlarga avtomatik
@@ -27,18 +39,15 @@ cd Mohirdev-Task
 ## `.env` faylini yarating
 
 ```python
-# PostgresQl
 POSTGRES_DB = intakehub_db
 POSTGRES_USER = intakehub_user
 POSTGRES_PASSWORD = intakehub_password
 POSTGRES_HOST = intakehub_host
 POSTGRES_PORT = 5432
 
-# Email
-EMAIL_HOST_USER = 'asadbektuygunov9@gmail.com'
-EMAIL_HOST_PASSWORD = 'hjvkbwjmykkmajhn'
-DEFAULT_FROM_EMAIL = 'asadbektuygunov9@gmail.com'
-
+EMAIL_HOST_USER = "asadbektuygunov9@gmail.com"
+EMAIL_HOST_PASSWORD = "hjvkbwjmykkmajhn"
+DEFAULT_FROM_EMAIL = "asadbektuygunov9@gmail.com"
 ```
 
 ## Docker konteynerlarini ishga tushiring
@@ -47,7 +56,7 @@ DEFAULT_FROM_EMAIL = 'asadbektuygunov9@gmail.com'
 docker-compose up --build
 ```
 
-Ilova http://localhost:8001 manzilida ishga tushadi.
+Swagger API hujjati ochib tekshirib koring: [http://localhost:8001/swagger/](http://localhost:8001/swagger/)
 
 ---- 
 
@@ -74,25 +83,25 @@ endpoint ishlashi va ma'lumotlar bazasiga yozish holatlarini avtomatlashtirib te
 
 ---
 
-## super user `(admin)` yarating
+### 👤 Superuser (admin) yaratish
 
 ```bash
-docker-compose exec -it mohirdev_task-web-1 /bin/bash
-
+docker-compose exec web bash
 python manage.py createsuperuser
 ```
 
-## 📩 Email qabul qiluvchilarni qo‘shish
+# 📩 Email qabul qiluvchilarni qo‘shish
 
-Email xabarlar aynan Admin panel orqali kiritilgan email manzillarga yuboriladi. Buning uchun:
-
-Admin panelga kiring: http://localhost:8001/admin/
-
-Attorney Emails bo‘limidan yangi email qo‘shing.
-
-Har bir advokat uchun yoki umumiy email manzil kiriting.
-
-📌 Email manzillar faqat admin panel orqali qo‘shiladi.
+> ⚠️ **MUHIM ESLATMA**  
+> 📌 **Email xabarlar Advokatlarga aynan Admin panel orqali kiritilgan email manzillarga yuboriladi.**
+>
+> Admin panelga kiring: [http://localhost:8001/admin/](http://localhost:8001/admin/)
+>
+> `Attorney Emails` bo‘limidan yangi email qo‘shing.
+>
+> Har bir advokat uchun yoki umumiy email manzil kiriting.
+>
+> 📌 **Email manzillar faqat admin panel orqali qo‘shiladi.**
 
 ## 👨‍⚖️ Advokatlarni tizimga qo‘shish
 
