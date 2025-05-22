@@ -18,9 +18,11 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=[permissions.AllowAny],
 )
-
+def trigger_error(request):
+    1 / 0  # test uchun xatolik
 
 urlpatterns = [
+    path("sentry-debug/", trigger_error),
     path('admin/', admin.site.urls),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0),
           name='schema-json'),

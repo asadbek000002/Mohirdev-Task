@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -228,11 +230,9 @@ CSRF_TRUSTED_ORIGINS = [
 CSRF_COOKIE_SECURE = True  # HTTPS orqali xavfsiz cookie'larni ishlatish
 CSRF_USE_SESSIONS = True  # CSRF tokenni sessiya orqali saqlash
 
-import sentry_sdk
-
 sentry_sdk.init(
     dsn="https://02461535cb9067c73d09cfb5df2c5a4f@o4509367982555136.ingest.de.sentry.io/4509367989239888",
-    # Add data like request headers and IP for users,
-    # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
-    send_default_pii=True,
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,  # performance tracing uchun
+    send_default_pii=True,  # foydalanuvchi ma'lumotlarini yuborish
 )
