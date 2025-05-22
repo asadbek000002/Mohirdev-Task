@@ -2,8 +2,9 @@ import pytest
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
-
 from intake.models import Lead
+from django.shortcuts import get_object_or_404
+from unittest.mock import patch
 
 User = get_user_model()
 
@@ -55,31 +56,28 @@ def sample_leads(db):
     return lead1, lead2
 
 
-# -------------------------
-# Test for Leads List View
-# -------------------------
-
 def test_list_all_leads(client_with_auth_user, sample_leads):
     response = client_with_auth_user.get("/attorney/leads-list/")
     assert response.status_code == 200
-    assert len(response.data) == 2
+    assert response.data["count"] == 2
+    assert len(response.data["results"]) == 2
 
 
 def test_filter_leads_by_status(client_with_auth_user, sample_leads):
     response = client_with_auth_user.get("/attorney/leads-list/?status=PENDING")
     assert response.status_code == 200
-    assert all(lead["status"] == "PENDING" for lead in response.data)
+    assert all(lead["status"] == "PENDING" for lead in response.data["results"])
 
 
-# -------------------------------
-# Test for Lead Status Update API
-# -------------------------------
-
-def test_patch_lead_status(client_with_auth_user, sample_leads):
+@patch("intake.tasks.lead_email_task.delay")
+def test_patch_lead_status(mock_task, client_with_auth_user, sample_leads):
     lead = sample_leads[0]
     response = client_with_auth_user.patch(f"/attorney/leads-status-update/{lead.id}/")
     assert response.status_code == 200
     assert response.data["status"] == "REACHED_OUT"
+    lead.refresh_from_db()
+    assert lead.status == Lead.LeadStatus.REACHED_OUT
+    mock_task.assert_called_once()
 
 
 def test_patch_lead_status_already_reached_out(client_with_auth_user, sample_leads):
