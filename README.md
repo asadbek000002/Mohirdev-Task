@@ -1,3 +1,6 @@
+Swagger UI (API testlash uchun):  
+ 👉 https://mohirdevtask.dialektalcorpus.uz
+
 ## 📚 Mavzular (Navigatsiya)
 
 
@@ -9,6 +12,8 @@
 6. [Email funksiyasi](#-email-qabul-qiluvchilarni-qoshish)  
 7. [Rezyume talablari](#-rezyume-fayliga-qoyilgan-talablar)  
 8. [Ishlash prinsipi](#sayt-qanday-ishlaydi)
+9. [Deploy haqida qisqacha](#-deploy-haqida-qisqacha)
+
 
 # IntakeHub loyihasi
 
@@ -140,6 +145,58 @@ emas.
 Maksimal hajm: 10 MB
 
 Ruxsat etilgan formatlar: .pdf, .doc, .docx
+
+---
+
+## 🚀 Deploy haqida qisqacha
+
+Loyiha quyidagi texnologiyalar yordamida muvaffaqiyatli deploy qilindi:
+
+    🐳 Docker va Docker Compose orqali konteynerlashgan holda ishga tushirildi
+
+    🌐 Nginx yordamida domen orqali backend'ga yo‘naltirish sozlandi
+
+    🔒 HTTPS (SSL) xavfsiz aloqa uchun Let's Encrypt sertifikati bilan ta’minlandi
+
+    🔐 CSRF va CORS sozlamalari to‘g‘ri konfiguratsiya qilindi
+
+    🛡️ Admin panel orqali tizimni boshqarish imkoniyati yaratilgan
+
+### 🌍 Kirish manzillari
+
+>    Swagger UI (API testlash uchun):
+>    👉 https://mohirdevtask.dialektalcorpus.uz
+>
+>    Admin panel:
+>    👉 https://mohirdevtask.dialektalcorpus.uz/admin/
+>
+>    Kirish uchun:  
+>    username: `admin`  
+>    password: `1234`
+ 
+### 🧪 Test qilish bo‘yicha ko‘rsatma
+
+- Admin panel orqali yangi advokat (attorney) yarating
+
+- Unga tegishli Gmail manzili kiriting
+
+- Postman yoki Swagger orqali JWT login qilin
+
+- JWT token bilan boshqa endpointlarni test qiling
+
+Eslatma: faqat advokatlar login qiladi – foydalanuvchilar ro‘yxatdan o‘ta olmaydi.
+
+### 🛠 Qo‘shimcha (avtomatik)
+
+- Swagger sahifasi root (/) ga redirect bo‘ladi
+
+- Barcha trafik 80 → 443 (HTTPS) ga avtomatik o‘tkaziladi
+
+- Swagger orqali barcha endpointlar test qilinishi mumkin
+
+- Backend statik fayllarni ham serve qiladi (agar kerak bo‘lsa)
+
+
 
 ## Muallif
 
