@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yangi Ariza</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 30px;
+      color: #1a202c;
+    }
+
+    .card {
+      max-width: 600px;
+      background: #ffffff;
+      margin: auto;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(100, 149, 237, 0.1);
+    }
+
+    h2 {
+      color: #2b6cb0;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .info p {
+      font-size: 16px;
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #2c5282;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #718096;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Yangi ariza yuborildi</h2>
+    <div class="info">
+      <p><span class="label">Ismi:</span> {{ first_name }}</p>
+      <p><span class="label">Familyasi:</span> {{ last_name }}</p>
+      <p><span class="label">Email:</span> {{ email }}</p>
+    </div>
+    <p class="footer">Bu ma’lumotni tizim orqali ko‘rib chiqishingiz mumkin.</p>
+  </div>
+</body>
+</html>

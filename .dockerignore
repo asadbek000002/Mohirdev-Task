@@ -1,0 +1,50 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Static and media files (agar build paytida yuklanmasa)
+static/
+media/
+mediafiles
+staticfiles
+# Local environment files
+.env
+*.env
+*.local
+
+
+db.sqlite3
+
+# Git-related files
+.git/
+.gitignore
+
+# Logs
+*.log
+
+*.pid
+
+# Bytecode files
+*.pyo
+*.pyc
+
+# Temporary files
+*.swp
+*.swo
+*.DS_Store
+*.bak
+
+
+
+# IDE and editor-specific files
+.vscode/
+.idea/

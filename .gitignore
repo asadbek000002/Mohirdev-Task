@@ -1,0 +1,38 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# IDE files
+.idea/
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Django migrations except __init__.py
+migrations/*
+!migrations/__init__.py
+
+# Database files
+*.sqlite3
+db.sqlite3
+
+# Static and media files
+media/
+static/
+mediafiles/
+staticfiles/
+# Logs
+*.log
+
+# Redis dump (agar kerak bo'lsa)
+dump.rdb
+
+# Coverage reports
+.coverage
+htmlcov/

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/intakehub
+      - static_volume:/intakehub/staticfiles
+      - media_volume:/intakehub/mediafiles
+    ports:
+      - "8001:8000"
+    depends_on:
+      intakehub_host:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: always
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+
+  intakehub_host:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: intakehub_db
+      POSTGRES_USER: intakehub_user
+      POSTGRES_PASSWORD: intakehub_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U intakehub_user -d intakehub_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6375:6379"
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  celery_worker:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/intakehub
+    depends_on:
+      - intakehub_host
+      - redis
+    command: celery -A intakehub worker --loglevel=info
+    restart: always
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

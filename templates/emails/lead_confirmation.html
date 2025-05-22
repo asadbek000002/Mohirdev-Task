@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arizangiz qabul qilindi</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f8ff; /* havo rang */
+      margin: 0;
+      padding: 40px 10px;
+      color: #1a202c;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Yon bezaklar uchun */
+    .shape-left, .shape-right {
+      position: fixed;
+      top: 50%;
+      width: 80px;
+      height: 80px;
+      background-color: #add8e6; /* engil havo rang */
+      border-radius: 50%; /* dumaloq bulut uchun */
+      opacity: 0.3;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    /* Agar uchburchak qilish kerak bo‘lsa, border bilan yaratish mumkin */
+    /* .shape-left {
+      left: -40px;
+      width: 0;
+      height: 0;
+      border-top: 40px solid transparent;
+      border-bottom: 40px solid transparent;
+      border-right: 40px solid #add8e6;
+      border-radius: 0;
+      opacity: 0.3;
+    }
+    .shape-right {
+      right: -40px;
+      width: 0;
+      height: 0;
+      border-top: 40px solid transparent;
+      border-bottom: 40px solid transparent;
+      border-left: 40px solid #add8e6;
+      border-radius: 0;
+      opacity: 0.3;
+    } */
+
+    .shape-left {
+      left: -40px;
+    }
+    .shape-right {
+      right: -40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 40px 50px 30px 50px;
+      box-shadow: 0 6px 18px rgba(100, 149, 237, 0.15);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    h2 {
+      color: #2b6cb0;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 28px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 12px 0;
+    }
+    .name {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #2c5282;
+    }
+    .email {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #4a5568;
+      font-style: italic;
+    }
+    strong {
+      color: #2c5282;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #718096;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="shape-left"></div>
+  <div class="shape-right"></div>
+  <div class="container">
+    <h2>Rahmat!</h2>
+    <p class="name">{{ first_name }} {{ last_name }}</p>
+    <p>Biz sizning arizangizni qabul qildik.</p>
+    <p class="email"><strong>Email:</strong> {{ email }}</p>
+    <p>Biz tez orada siz bilan bog‘lanamiz.</p>
+    <p class="footer">Hurmat bilan,<br><strong>{{ user_name }}</strong></p>
+  </div>
+</body>
+</html>
