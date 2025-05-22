@@ -7,8 +7,9 @@ from intake.tasks import attorney_email_task
 
 class LeadCreateApiView(APIView):
     """
-       Yangi Etakchi yaratish uchun POST usuli.
+       **Eslatma:** Ma’lumotlar `form-data` formatida yuborilishi kerak.
 
+       Yangi Etakchi yaratish uchun POST usuli.
        Ushbu yakuniy nuqta umumiy foydalanuvchilarga yetakchi formani yuborish imkonini beradi.
        Muvaffaqiyatli topshirilgandan so'ng, advokatlarga elektron pochta xabari yuboriladi.
     """
