@@ -140,3 +140,10 @@ emas.
 Maksimal hajm: 10 MB
 
 Ruxsat etilgan formatlar: .pdf, .doc, .docx
+
+## Muallif
+
+Asadbek Tuygunov — dasturchi va loyiha muallifi.
+
+
+
