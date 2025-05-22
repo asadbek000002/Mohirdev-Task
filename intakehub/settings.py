@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9%7r1qhqbv0bw2%m***xxmdk%*cwkoyway=ptsjc!(6s@3sdwv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://mohirdevtask.dialektalcorpus.uz", "http://mohirdevtask.dialektalcorpus.uz"]
 
 # Application definition
 
@@ -212,19 +212,18 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # CORS Ruxsatlar
-# CORS_ALLOWED_ORIGINS = [
-#     "https://ari.uzfati.uz",
-#     "http://ari.uzfati.uz",
-# ]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://mohirdevtask.dialektalcorpus.uz",
+    "https://mohirdevtask.dialektalcorpus.uz",
+]
 
 CORS_ALLOW_CREDENTIALS = True  # Cookie va auth tokenlarni ishlatish uchun
 
 # CSRF sozlamalari
-# CSRF_TRUSTED_ORIGINS = [
-#     "http://warehouse.bekzodbek-dev.uz",
-#     "https://warehouse.bekzodbek-dev.uz",
-# ]
-#
+CSRF_TRUSTED_ORIGINS = [
+    "http://mohirdevtask.dialektalcorpus.uz",
+    "https://mohirdevtask.dialektalcorpus.uz",
+]
+
 CSRF_COOKIE_SECURE = True  # HTTPS orqali xavfsiz cookie'larni ishlatish
 CSRF_USE_SESSIONS = True  # CSRF tokenni sessiya orqali saqlash
