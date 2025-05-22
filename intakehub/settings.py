@@ -177,7 +177,7 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 # 'redis' bu docker-compose.yml dagi servis nomi bo‘lib, konteyner ichida shu nom bilan murojaat qilinadi.
 # CELERY_BROKER_URL = 'redis://localhost:6379/0' runserver uchun
 
-CELERY_BROKER_URL = 'redis://redis:6372/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
